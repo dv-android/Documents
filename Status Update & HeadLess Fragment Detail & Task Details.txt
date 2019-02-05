@@ -1,0 +1,81 @@
+-- how to start tomcat server without eclipse ??
+i.e by going into tomcat bin directory & running shutdown.sh , startup.sh file respectively.
+then checking in browser by hitting localhost:<port_no>/<project_name>/<end_point>
+
+-- how to create war file for j2ee dynamic web project in eclipse studio & deploying it into tomcat webapps directory.
+
+
+- how to prepare http post request for localhost login endpoint by HttpURLConnection class i.e. post request header & post request body ???
+
+- exact format for http get & post request ??
+- difference between form-data and x-www-form-urlencoded in post request ??
+
+
+- sending GET request with JWT authorization header to the REST endpoint implemented . But while implementing code  , there was continuous HTTP respose with 405 code.So when debugged , the problem was with setDoOutput method which was set as TRUE. So that has to be removed and only setInput (true) must be set when ypu are sending GET request with HttpURLConnection class.Then only TOMCAT server responds with 200 http status code.
+- lesson for today - get in depth with working mechanism of setInput() & setOutput() method.
+
+
+
+
+HEADLESS FRAGMENTS FOR ASYNC TASK i.e. BACKGROUND TASK :-
+
+-DURING SCREEN ORIENTATION CHANGE  -- " Retaining UI state of the activity i.e. checkbox state OR Radio button state by effectively using onSaveInstance method & restroing UI state via Bundle Obejects " IS COMPLETELY DIFFERENT CONCEPT THAN Retaining Running Object state i.e. AsyncTask , Socket , Threads by effectively using HEADLESS FRAGMENT & calling fragments method setRatainInstance(true).
+
+- Got familiar with Headless Fragment working from following blog & project.
+- https://www.androiddesignpatterns.com/2013/04/retaining-objects-across-config-changes.html
+- https://github.com/alexjlockwood/adp-worker-fragments
+- https://github.com/dv-android/best-HeadLess-Fragment-example
+
+
+PROJECT NAME :- ListViewAsyncTask
+Github URL :- 
+
+- This project fully demonstrates the use of HttpUrlConnection class to fetch JSON response from REST API using AsyncTask. Whenever you want to peform any background work i.e. network operation like getting data from remote API , always execute that work in seperate thread because implementing such operations in main thread may cause 'Application Not Responding - ANR' problem if network connection fails OR not responding as expected.
+
+- Problem with AsynTask during Configuration Change & The need to have HEADLESS FRAGMENT :-
+One problem with configuration changes and the destroy-and-create cycle that Activitys go through as a result stems from the fact that these events are unpredictable and may occur at any time. Concurrent background tasks only add to this problem. Assume, for example, that an Activity starts an AsyncTask and soon after the user rotates the screen, causing the Activity to be destroyed and recreated. When the AsyncTask eventually finishes its work, it will incorrectly report its results back to the old Activity instance, completely unaware that a new Activity has been created. As if this wasn’t already an issue, the new Activity instance might waste valuable resources by firing up the background work again, unaware that the old AsyncTask is still running. For these reasons, it is vital that we correctly and efficiently retain active objects across Activity instances when configuration changes occur.
+
+- Managing the Active Object inside a Retained Fragment :-
+Ever since the introduction of Fragments in Android 3.0, the recommended means of retaining active objects across Activity instances is to wrap and manage them inside of a retained “worker” Fragment. By default, Fragments are destroyed and recreated along with their parent Activitys when a configuration change occurs. Calling Fragment#setRetainInstance(true) allows us to bypass this destroy-and-recreate cycle, signaling the system to retain the current instance of the fragment when the activity is recreated. As we will see, this will prove to be extremely useful with Fragments that hold objects like running Threads, AsyncTasks, Sockets, etc.
+
+- In our project the requirement was as follow.
+ListActivity should fetch an arraylist from remote REST api & if you rotate the screen the complete state of ListView must be maintained.
+
+
+- We had one main activity i.e. List Activity which hosts the HeadLess Fragment. Now this HeadLess Fragment actually holds a AsyncTask object which actually gets the data from remote API.
+- We are creating an object of AsyncTask & then calling its execute() method in the fragment's onCreate method in spite of Activity's onCreate method .Also setRetainInstance(true) has been called from fragments onCreate method. No matter how many times Activity gets destroyed & re-created during configuration changes but Headless Fragment won't be destroyed & re-created . It will be held in memory which means fragment's onCreate & onDestroy method will be called only for ONCE during entire lifetime of an activity because we called setRetainInstance() method to be true.
+- Now if we would have written creation of AsyncTask object & calling its execute method in Activity's onCreate method then there would have been severe memory leaks. How ? 
+Suppose your AsyncTask has not completed its operation i.e downloading data from network . Your AsyncTask is actually in middle of completing its operation & if the user has rotated the deivce so your activity got destroyed & created again.Now newly created Activity lost the reference to the previously running AsyncTask object &  has created new AssyncTask object. That means your old AyncTask object remain intact in memory & now it has no idea to which activity it has to report back its result. Besides that , same new copy of AsyncTask object has been created by Activity though old one was present.So this is called as major MEMMORY LEAK issue in your app.  
+
+SURPRISING PART :-
+- We had implemented HeadLess Fragment for AsyncTask successfully but if I rotate the device Activity was becoming blank which means no listview at all.
+- Debugged all lifecycle methods of Activity as well as Fragment by printing log statement to ensure that Fragment's onCreate & onDestroy method called only for once even though Activity gets destroyed & created again. So that was implemented correctly , no issue.
+- so why listview doesn't appear if device gets rotated though HeadLess Fragment implemented correctly. Where is the problem ??
+- The problem was Headless Fragment only deals with the active running object states i.e. it only retains running object while configuration change. Running objects means Thread , Socket OR AsyncTask.Retaining running object state has got nothing to do with the UI state of an activity. 
+- Reatining running object state by using Headless Fragment does not actually retain the UI state of an activity.
+- The reason why ListActivity lost its UI state i.e all of its list rows is because soon after activity destroyed , the activity has lost its UI state completely. And whenever activity re-created , we were not restoring its UI state.
+- So the solution was that before activity gets destroyed , save its UI state in bundle object in onSaveInstance method & retrieve it back in onRestoreInstance method.
+- But in our case we had to retain ARRAYLIST<Object> and Bundle object only holds primitive data. ARRAYLIST<Object> is actually non-primitive data. So to pass ARRAYLIST<Object> in Bundle object we had to typecast it as a Serializable as follow.
+         
+                     bundle.putSerializable("ARRAYLIST",(Serializable) arrayList)
+
+- And retrieve it as follow in onRetainInstanceState...
+           ArrayList<Object> arrayList = (ArrayList<Object>)bundleState.getSerializable("ARRAYLIST")
+
+- But still there is one issue,  we restored all the list rows of listview while configuration change but the scroll position of listview  is lost. i.e. if user has scrolled up to 20th row & that 20th row is now the first row & user rotated the deivce but listview starts showing listrow from the 1st row , not 20th row.
+- That can be retained by using Parcelable interface.Get the listview current scroll & other state by calling onSaveInstanceState() method on listview & save it in a parcelable reference variable.Then put that parcelable object in Bundle object as follow.
+                 
+                 Parcelable state =  getListView().onSaveInstanceState();
+                 bundle.putParcelable("listViewState",state); 
+
+- And then retrieve that Parcelable object in onRestoreInstanceState() method as follow..
+
+                  Parcelable state = bundleState.getParcelable("listViewState");
+                  getListView().onRestoreInstanceState(state);
+
+References :-
+-https://www.androiddesignpatterns.com/2013/04/retaining-objects-across-config-changes.html
+-https://stackoverflow.com/questions/11182180/understanding-fragments-setretaininstanceboolean
+-https://futurestud.io/tutorials/how-to-save-and-restore-the-scroll-position-and-state-of-a-android-listview
+-https://newfivefour.com/android-save-list-position-rotation-backpress.html
+-https://stackoverflow.com/questions/13601883/how-to-pass-arraylist-of-objects-from-one-to-another-activity-using-intent-in-an
