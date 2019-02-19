@@ -11,8 +11,8 @@ then checking in browser by hitting localhost:<port_no>/<project_name>/<end_poin
 - difference between form-data and x-www-form-urlencoded in post request ??
 
 
-- sending GET request with JWT authorization header to the REST endpoint implemented . But while implementing code  , there was continuous HTTP respose with 405 code.So when debugged , the problem was with setDoOutput method which was set as TRUE. So that has to be removed and only setInput (true) must be set when ypu are sending GET request with HttpURLConnection class.Then only TOMCAT server responds with 200 http status code.
-- lesson for today - get in depth with working mechanism of setInput() & setOutput() method.
+- sending GET request with JWT(JSON Web Token) authorization header to the REST endpoint implemented . But while implementing code  , there was continuous HTTP respose with 405 code . So when debugged , the problem was with setDoOutput method which was set as TRUE. So that has to be removed and only setInput (true) must be set when ypu are sending GET request with HttpURLConnection class.Then only TOMCAT server responds with 200 http status code.
+- lesson for today - get in depth with working mechanism of setDoInput() & setDoOutput() method.
 
 
 
@@ -32,7 +32,7 @@ Github URL :-
 
 - This project fully demonstrates the use of HttpUrlConnection class to fetch JSON response from REST API using AsyncTask. Whenever you want to peform any background work i.e. network operation like getting data from remote API , always execute that work in seperate thread because implementing such operations in main thread may cause 'Application Not Responding - ANR' problem if network connection fails OR not responding as expected.
 
-- Problem with AsynTask during Configuration Change & The need to have HEADLESS FRAGMENT :-
+- Problem with AsyncTask during Configuration Change & The need to have HEADLESS FRAGMENT :-
 One problem with configuration changes and the destroy-and-create cycle that Activitys go through as a result stems from the fact that these events are unpredictable and may occur at any time. Concurrent background tasks only add to this problem. Assume, for example, that an Activity starts an AsyncTask and soon after the user rotates the screen, causing the Activity to be destroyed and recreated. When the AsyncTask eventually finishes its work, it will incorrectly report its results back to the old Activity instance, completely unaware that a new Activity has been created. As if this wasn’t already an issue, the new Activity instance might waste valuable resources by firing up the background work again, unaware that the old AsyncTask is still running. For these reasons, it is vital that we correctly and efficiently retain active objects across Activity instances when configuration changes occur.
 
 - Managing the Active Object inside a Retained Fragment :-
@@ -59,6 +59,14 @@ SURPRISING PART :-
          
                      bundle.putSerializable("ARRAYLIST",(Serializable) arrayList)
 
+- But while typecasting non-primitive object as a Seraliazable as above  , there was continues a run time error was being thrown at when interpreter comes to above line & error was as follow....
+
+                             "java.lang.RuntimeException: Parcel: unable to marshal value null"
+
+So the problem was actually with NULL values which were actually present in arrayList object because java doesn't allow serailization of NULL values , it can only seraialize NON-NULL values.
+- After quite R & D over google , got the solution. All NULL values must be removed from arrayList before seralizing & for that you have to use 3rd Party library which is JACKSON.
+- JACKSON JSONlibrary allows removal of NULL values from any type of JSON response that you receive from remote API.Once all NULL values have been removed then arrayList can be serialized very easily without any error.
+
 - And retrieve it as follow in onRetainInstanceState...
            ArrayList<Object> arrayList = (ArrayList<Object>)bundleState.getSerializable("ARRAYLIST")
 
@@ -79,3 +87,11 @@ References :-
 -https://futurestud.io/tutorials/how-to-save-and-restore-the-scroll-position-and-state-of-a-android-listview
 -https://newfivefour.com/android-save-list-position-rotation-backpress.html
 -https://stackoverflow.com/questions/13601883/how-to-pass-arraylist-of-objects-from-one-to-another-activity-using-intent-in-an
+
+
+
+Got familiar with Android Parcelable concept & why it exists ?
+The main reason why Parcelable exsists is 'suppose you have to pass custom java objects between two Android Components i.e. from one Activity to another Activity'
+References :-
+BEST - https://guides.codepath.com/android/using-parcelable
+http://www.vogella.com/tutorials/AndroidParcelable/article.html
