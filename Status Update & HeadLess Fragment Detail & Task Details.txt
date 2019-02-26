@@ -95,3 +95,15 @@ The main reason why Parcelable exsists is 'suppose you have to pass custom java 
 References :-
 BEST - https://guides.codepath.com/android/using-parcelable
 http://www.vogella.com/tutorials/AndroidParcelable/article.html
+
+
+
+Got familiar with WakefulBroadCastReceiver & why it exists ??
+If you have background service in your app & you want to keep it in running state even when the device power goes off i.e screen gets off then you have to acquire WakeLock in your service.
+By default no bakground service acuqires wakelock , one has to acquire it manually.
+References :-
+-https://software.intel.com/en-us/android/articles/wakelocks-for-android
+-https://developer.android.com/training/scheduling/wakelock#wakeful
+-https://www.concretepage.com/android/android-alarm-clock-tutorial-to-schedule-and-cancel-alarmmanager-pendingintent-and-wakefulbroadcastreceiver-example
+-https://www.thepolyglotdeveloper.com/2014/10/use-broadcast-receiver-background-services-android/
+-https://www.truiton.com/2014/09/android-service-broadcastreceiver-example/
