@@ -111,3 +111,14 @@ References :-
 -https://www.concretepage.com/android/android-alarm-clock-tutorial-to-schedule-and-cancel-alarmmanager-pendingintent-and-wakefulbroadcastreceiver-example
 -https://www.thepolyglotdeveloper.com/2014/10/use-broadcast-receiver-background-services-android/
 -https://www.truiton.com/2014/09/android-service-broadcastreceiver-example/
+
+
+
+
+
+
+NEW TOPIC :- RECYCLER VIEW AND CARD VIEW ( MATERIAL DESIGN )
+
+
+- Got fully familiar with Recycler View & Card View from Head First Android book 14th Chapter. Besides that also followed videos on youtube. Why Recycle View exists ?? that is best answered in youtube videos & how recycler view along with card could be coded that is best answered in Head First Android 14th Chapter.
+- https://www.youtube.com/watch?v=Wq2o4EbM74k
