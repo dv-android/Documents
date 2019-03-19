@@ -122,3 +122,18 @@ NEW TOPIC :- RECYCLER VIEW AND CARD VIEW ( MATERIAL DESIGN )
 
 - Got fully familiar with Recycler View & Card View from Head First Android book 14th Chapter. Besides that also followed videos on youtube. Why Recycle View exists ?? that is best answered in youtube videos & how recycler view along with card could be coded that is best answered in Head First Android 14th Chapter.
 - https://www.youtube.com/watch?v=Wq2o4EbM74k
+- https://www.youtube.com/watch?v=A5cUZlUnRUw
+- https://www.youtube.com/watch?v=mGTRNp6FbU4
+- https://www.youtube.com/watch?v=OoCySqneJno
+
+- GitHub Project Detail - https://github.com/dv-android/BitsAndPizzaMaterial
+- Coded  project named 'BitsAndPizzaMaterial' which illustrates the use of Card View & Recycler View.
+
+Important Note :-
+In Android you code everything in MVC pattern. For e.g. to code above project which exposes Card View & Recycler view your entire code gets divide into three parts.
+1. Your individual ROW XML layout i.e. what different view elements your single row will contain 
+(in our case xml code for Card View which also includes xml code for different view elements) - "VIEW" part
+2. Custom Adapter class which extends RecyclerView.Adapter class & override its methods. - "CONTROLLER" part
+3. Data Set i.e. list of Data items that has to be stuffed into each row's view elements. That is defined by POJO file. - "MODEL" part
+
+So
