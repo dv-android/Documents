@@ -131,9 +131,9 @@ NEW TOPIC :- RECYCLER VIEW AND CARD VIEW ( MATERIAL DESIGN )
 
 Important Note :-
 In Android you code everything in MVC pattern. For e.g. to code above project which exposes Card View & Recycler view usage ,  your entire code gets divide into three parts.
-1. Your individual ROW XML layout i.e. what different view elements your single row will contain 
+1. Your individual ROW's XML layout i.e. what different view elements your single row will contain 
 (in our case xml code for Card View which also includes xml code for different view elements) - "VIEW" part
 2. Custom Adapter class which extends RecyclerView.Adapter class & override its methods. - "CONTROLLER" part
-3. Data Set i.e. list of Data items that has to be stuffed into each row's view elements. That is defined by POJO file. - "MODEL" part
+3. Data Set i.e. list of Data items that has to be stuffed into each row's view elements. That is defined by POJO file in our case OR you may recieve data from remote web API . - "MODEL" part 
 
 So
