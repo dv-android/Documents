@@ -28,7 +28,7 @@ HEADLESS FRAGMENTS FOR ASYNC TASK i.e. BACKGROUND TASK :-
 
 
 PROJECT NAME :- ListViewAsyncTask
-Github URL :- 
+Github URL :- https://github.com/dv-android/ListViewAsyncTask
 
 - This project fully demonstrates the use of HttpUrlConnection class to fetch JSON response from REST API using AsyncTask. Whenever you want to peform any background work i.e. network operation like getting data from remote API , always execute that work in seperate thread because implementing such operations in main thread may cause 'Application Not Responding - ANR' problem if network connection fails OR not responding as expected.
 
@@ -136,4 +136,20 @@ In Android you code everything in MVC pattern. For e.g. to code above project wh
 2. Custom Adapter class which extends RecyclerView.Adapter class & override its methods. - "CONTROLLER" part
 3. Data Set i.e. list of Data items that has to be stuffed into each row's view elements. That is defined by POJO file in our case OR you may recieve data from remote web API . - "MODEL" part 
 
-So
+
+
+9th April'2019
+- While revising project name "Joke" , gone through "what are Services ?" in written notes.
+--  https://github.com/dv-android/Joke
+- Also gone through "Task & Back Stack in Android" from following link.
+--  https://developer.android.com/guide/components/activities/tasks-and-back-stack
+
+I'm sure you can find an extensive list of differences by simply googling something such as 'Android IntentService vs Service'
+One of the more important differences per example is that IntentService ends itself once it's done.
+Some examples (quickly made up) could be;
+IntentService: If you want to download a bunch of images at the start of opening your app. It's a one-time process and can clean itself up once everything is downloaded.
+Service: A Service which will constantly be used to communicate between your app and back-end with web API calls. Even if it is finished with its current task, you still want it to be around a few minutes later, for more communication.
+
+- If you start service by startServcie() method then that will be treated as STRATED service , no matter whether it has been implemented by extending Service class OR IntentService class.
+- To get complete working of Started service by extending IntentService class , I started a service named "DelayedMessageService" (in our project "Joke") by startService(intent) method and then executed  "finish()" method in activity to destroy cuurently running activity.
+- Though Activity which started the 'DelayedMessageService' got destroyed but service kept running & after 10 seconds of interval it showed status bar notification.  
