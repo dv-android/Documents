@@ -153,3 +153,17 @@ Service: A Service which will constantly be used to communicate between your app
 - If you start service by startServcie() method then that will be treated as STRATED service , no matter whether it has been implemented by extending Service class OR IntentService class.
 - To get complete working of Started service by extending IntentService class , I started a service named "DelayedMessageService" (in our project "Joke") by startService(intent) method and then executed  "finish()" method in activity to destroy cuurently running activity.
 - Though Activity which started the 'DelayedMessageService' got destroyed but service kept running & after 10 seconds of interval it showed status bar notification.  
+
+
+
+
+25th April'2019
+
+- Gone through BitsAndPizzaa project :-
+- Github Link :- https://github.com/dv-android/BitsandPizzaa
+- Project Points to be Included :-
+- How Navigation Drawer works ?? i.e. Drawer Layout..
+- Create XML drawrer layout file . Inside DrawerLayout , the view that has to be acted as a DRAWER add attribute named "android:layout_gravity="start". layout_gravity attribute in Drawer Layout defines the opening direction of Drawer view i.e. from Left to Right OR from Right to Left. 
+- For showing different menu items into ActionBar , you have to create Menu resources XML with required menu items & that Menu XML resource is actually inflated in onCreateOptionsMenu() method.
+- Just before menu is being inflated over ActionBar onPrePareOptionMenu() method is called where you can customize menu items as per your need ..
+- Fragment transaction's addToBackStack method decides whether opening order of the fragments to be maintained OR not when user presses the Back button.If you don't call this method then background navigation on back button won't work i.e. clicking on back button will get you out of the app.
