@@ -177,3 +177,22 @@ Service: A Service which will constantly be used to communicate between your app
 - https://www.geeksforgeeks.org/java-util-hashmap-in-java/
 - Also while going through "HashMap" article from above article , figured out what is actually "Hashing" ??
 - https://www.geeksforgeeks.org/hashing-set-1-introduction/
+
+
+
+7th May'2019
+
+- What are Services in Android ??
+- Best reference would be from Head First Android reference book.
+- There are two types of services in Android..
+  1. Started Service
+  2. Bound Service
+ 
+ 1. Started Services are those which runs indefinately irrespective of whether the component that actually started the service has been running or not which means the activity which has started the service has been destroyed but the service keeps running until it finishes its job. Such services are actually implemented by extending IntentService class and the service code is actually written inside onHandleIntent() method. 
+     -  onHandleIntent() method runs on different thread so you can not update UI components from this method directly because in Android UI can only be updated by Main thread. You have to use "Handler" to do that.Handler from this method can easily update the UI component.
+     -  Why there is actually need of doing updation operation from Service ? is --- If service has finished off its operation and it has to be notified to the user then there are basically two ways this can be achieved.
+           -  Either you notify it via Toast notification OR show notification message on Notification Drawer by using Notification Service.
+     - If you are implementing this using Notification Service then there is no as such need of Handler because the notification service deals will all of the issues involved in a background service sending updates to the screen i.e. to Main Thread. This means that you no longer need to use a handler in order to update the user interface; the notification service handles it for you.
+     -  onStartCommand() method actually runs on Main thread in IntentService class so to use Handler in this method you have to declare Handler reference variable at class level & then  you have to invoke it inside onStrtCommand method. After invocation , you will call post method on Handler object from onHandleIntent() method which will actually update the UI component.
+
+ 2. Bound Services are those which are actually bound to Android Component i.e. if the Activity which has started the Service has been destroyed the the Service will also be destroyed.
