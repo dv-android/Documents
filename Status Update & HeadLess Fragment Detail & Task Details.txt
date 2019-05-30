@@ -196,3 +196,11 @@ Service: A Service which will constantly be used to communicate between your app
      -  onStartCommand() method actually runs on Main thread in IntentService class so to use Handler in this method you have to declare Handler reference variable at class level & then  you have to invoke it inside onStrtCommand method. After invocation , you will call post method on Handler object from onHandleIntent() method which will actually update the UI component.
 
  2. Bound Services are those which are actually bound to Android Component i.e. if the Activity which has started the Service has been destroyed the the Service will also be destroyed.
+    - Gone through following article - 
+    https://www.truiton.com/2014/11/bound-service-example-android/
+    - Then gone through Bound Services article from Android official docs - 
+    https://developer.android.com/guide/components/bound-services#java
+    - Also gone through what is the axact Role of Binder in Android Framework ?
+    https://stackoverflow.com/questions/15222041/android-what-is-binder-thread
+    https://sujaiantony.wordpress.com/2011/12/28/an-android-101-an-overview-on-binder-framework/
+    
