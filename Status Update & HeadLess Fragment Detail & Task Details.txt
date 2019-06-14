@@ -197,10 +197,80 @@ Service: A Service which will constantly be used to communicate between your app
 
  2. Bound Services are those which are actually bound to Android Component i.e. if the Activity which has started the Service has been destroyed the the Service will also be destroyed.
     - Gone through following article - 
-    https://www.truiton.com/2014/11/bound-service-example-android/
+    https://www.truiton.com/2014/11/bound-service-example-andrsoid/
     - Then gone through Bound Services article from Android official docs - 
     https://developer.android.com/guide/components/bound-services#java
     - Also gone through what is the axact Role of Binder in Android Framework ?
     https://stackoverflow.com/questions/15222041/android-what-is-binder-thread
     https://sujaiantony.wordpress.com/2011/12/28/an-android-101-an-overview-on-binder-framework/
     
+13'th June 2019
+
+Gone through how to debug android application by using integrated studio debugger.
+- https://www.strv.com/blog/debugging-in-android-studio-as
+- https://www.youtube.com/watch?v=nBaL78HC0ls
+- https://www.youtube.com/watch?v=LKCvtNj8C0s
+
+14'th June 2019
+
+Gone thorugh how Android HttpURLConnection class consumes JSON data as a STREAM & convert it again into JSON via JAVA STREAMING API. For that , you should be well aware of HOW STRAEAMING works in JAVA , referred following links.
+- https://www.studytonight.com/java/java-io-stream.php
+- https://www.quora.com/What-is-stream-in-java
+- https://stackoverflow.com/questions/2492076/android-reading-from-an-input-stream-efficiently
+- https://stackoverflow.com/questions/45635739/rest-streaming-json-output 
+
+           JSON string read by ANdroid as a InputStream i.e. InputStream stream = connection.getInputStream()
+                                            
+                                            |
+                                            |
+
+           Then convert that ByteStream into CharacterStream using InputStreamReader class. i.e.
+                    Reader reader = new InputStreamReader(stream, "UTF-8");
+                                            
+                                            |
+                                            | 
+
+           Then convert that CharacterStream into character Array using Reader class's read(char[] cbuf) method
+                             int readSize = reader.read(rawBuffer).
+           Here rawBuffer is actually declared as character array.
+
+           									|
+           									|
+
+           Then convert it into StringBuffer using following method.
+           					StringBuffer buffer = new StringBuffer();
+                            buffer.append(rawBuffer, 0, readSize);
+
+                            				|
+                            				|
+
+           Then convert that StringBuffer object into String object.
+                            String conString = buffer.toString();
+
+                            				|
+                            				|
+
+        	Then prepare JSONObject from that String object.
+        	                JSONObject jsonObj = new JSONObject(conString);
+
+        	                				|
+        	                				|
+
+			Now you have to iterate through each key in JSON object & retrieve its value & push it into ArrayList.
+				        ArrayList  arrayList = new ArrayList<Object>();
+				        Iterator<String> keys = jsonObj.keys();
+
+				        while(keys.hasNext()) {
+				            String key = keys.next();
+				            Object temp = jsonObj.get(key);
+				            arrayList.add(temp);
+				            Log.d("LoadFeedData outside ","json content is "+temp);
+				            if (jsonObj.get(key) instanceof JSONObject) {
+				                Log.d("LoadFeedData inside","json content is "+jsonObj.get(key));
+				            }
+				        }
+
+
+				        					|
+				        					|
+            And finally you have to return that ArrayList object from Async Task to Main Activity , where it will be used while creating Listview's ArrayAdapter class.
