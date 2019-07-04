@@ -274,3 +274,27 @@ Gone thorugh how Android HttpURLConnection class consumes JSON data as a STREAM 
 				        					|
 				        					|
             And finally you have to return that ArrayList object from Async Task to Main Activity , where it will be used while creating Listview's ArrayAdapter class.
+
+
+
+3rd July'19
+
+- What is Volley library in Android & How it is useful ?
+- Please refer Volley Sub-Bookmark in main Android Bookmark.
+
+ Referred Links
+ - https://www.youtube.com/watch?v=yhv8l9F44qo
+ - https://www.youtube.com/watch?v=jvaYsA5u0Ww   ---- BEST
+ - http://www.technotalkative.com/android-volley-library-example
+
+ 4th July'19 
+
+ - While going through Volley Tutorial came across SingleTon Design Pattern i.e. https://www.youtube.com/watch?v=bpYqzRkxNPM
+ - So figured out what is Singleton Design Patterns from following link ..
+   -  https://howtodoinjava.com/design-patterns/creational/singleton-design-pattern-in-java/
+
+- For complete guide to Design Patterns , please check Bookmark 'Design Patterns w.r.t Java' i.e.  
+   - https://howtodoinjava.com/gang-of-four-java-design-patterns/
+
+- While going through Singleton Design Pattern , figured out what is exact use of 'VOLATILE' keyword in Java ?
+ - https://javarevisited.blogspot.com/2011/06/volatile-keyword-java-example-tutorial.html
