@@ -121,6 +121,8 @@ NEW TOPIC :- RECYCLER VIEW AND CARD VIEW ( MATERIAL DESIGN )
 
 
 - Got fully familiar with Recycler View & Card View from Head First Android book 14th Chapter. Besides that also followed videos on youtube. Why Recycle View exists ?? that is best answered in youtube videos & how recycler view along with card could be coded that is best answered in Head First Android 14th Chapter.
+- https://www.quora.com/What-is-RecyclerView-in-Android-and-how-does-it-work
+- https://stackoverflow.com/questions/40584424/simple-android-recyclerview-example - BEST
 - https://www.youtube.com/watch?v=Wq2o4EbM74k
 - https://www.youtube.com/watch?v=A5cUZlUnRUw
 - https://www.youtube.com/watch?v=mGTRNp6FbU4
