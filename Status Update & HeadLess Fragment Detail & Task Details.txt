@@ -301,7 +301,14 @@ Gone thorugh how Android HttpURLConnection class consumes JSON data as a STREAM 
 - While going through Singleton Design Pattern , figured out what is exact use of 'VOLATILE' keyword in Java ?
  - https://javarevisited.blogspot.com/2011/06/volatile-keyword-java-example-tutorial.html
 
+ - Use a singleton pattern
+If your application makes constant use of the network, it's probably most efficient to set up a single instance of RequestQueue that will last the lifetime of your app. You can achieve this in various ways. The recommended approach is to implement a singleton class that encapsulates RequestQueue and other Volley functionality. Another approach is to subclass Application and set up the RequestQueue in Application.onCreate(). But this approach is discouraged; a static singleton can provide the same functionality in a more modular way.
+
+A key concept is that the RequestQueue must be instantiated with the Application context, not an Activity context. This ensures that the RequestQueue will last for the lifetime of your app, instead of being recreated every time the activity is recreated (for example, when the user rotates the device).
+
  15th July'19
 
  - What is Context exactly in Android & Why it exists ???
    - https://www.youtube.com/watch?v=89H-FHFyXaA
+
+   - Interface to global information about an application environment. This is an abstract class whose implementation is provided by the Android system. It allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents, etc.
