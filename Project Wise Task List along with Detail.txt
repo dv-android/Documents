@@ -1,0 +1,14 @@
+Reminder Project :-
+
+-- UI Featutes Implemented :--
+1. Implemented Navigation Drawer UI using Drawer Layout which actually shows your appp's main navigation menu.
+   -- Drawer Layout is actually part of Android V4 Support library.
+2. Implemented different views for each different screen using Fragments.
+   -- Inflated Menu Item using R.Menu.menu resource in onCreateOptionsMenu method.
+   -- On clicking menu item , a general Dialog box will be shown.
+5. Implemented a Main Dialog box , Reminder Dialog box , Birthday Dialog box using AlertDialog API with Builder pattern.
+6. Implemented Custom ArrayAdapter for ListView with custom list items which works for Main Dialog Box.
+7. Converting curent date & time into unix timestamp (milliseconds) using Calender API getTimeInMillis() method & storing into SQLite database for future use.
+8. Firing task reminder OR Birthday notification 24 hours prior to actual time of notification in Notification Drawer area as Upcoming event and another notification on actual time as a system level alert dialog box using AlarmManager , PendingIntent & BroadcastReceiver.    
+    
+
