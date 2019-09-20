@@ -1,6 +1,6 @@
-Reminder Project :-
+To Do Reminder With Alarm Project :-
 
--- UI Featutes Implemented :--
+-- UI & Significant Featutes Implemented :--
 1. Implemented Navigation Drawer UI using Drawer Layout which actually shows your appp's main navigation menu.
    -- Drawer Layout is actually part of Android V4 Support library.
 2. Implemented different views for each different screen using Fragments.
@@ -10,5 +10,18 @@ Reminder Project :-
 6. Implemented Custom ArrayAdapter for ListView with custom list items which works for Main Dialog Box.
 7. Converting curent date & time into unix timestamp (milliseconds) using Calender API getTimeInMillis() method & storing into SQLite database for future use.
 8. Firing task reminder OR Birthday notification 24 hours prior to actual time of notification in Notification Drawer area as Upcoming event and another notification on actual time as a system level alert dialog box using AlarmManager , PendingIntent & BroadcastReceiver.    
+
+
+
+Inventory Tracking App :-
+
+App Detail :- It's primarily for managing inventory efficiently which gives various insights of inventory , over-all Net-Profit of the business , current monetory valuation of inventory. Various modules interact with inventory.
+Shows different Reports for purchase , sales , income , expense.
+
+-- UI & Significant Features Implemented :--
+1. Developed Inventory Item List , Supplier List , Customer List using Custom ArrayAdapter.
+2. Implemented different views for Sales Order screen , Purcahse order screen using Fragments & updating those details in local SQLite DB.After successful DB operation ,  updating required Fragments from updated DB.
+3. Implemented views for different reports i.e. inventory valuation report , Income - Expense Report , Profit/Loss report using Fragments.
+4. Firing low inventory stock notification.
     
 
