@@ -19,9 +19,22 @@ App Detail :- It's primarily for managing inventory efficiently which gives vari
 Shows different Reports for purchase , sales , income , expense.
 
 -- UI & Significant Features Implemented :--
-1. Developed Inventory Item List , Supplier List , Customer List using Custom ArrayAdapter.
+1. Developed Inventory Item List , Supplier List , Customer List screen using Custom ArrayAdapter.
 2. Implemented different views for Sales Order screen , Purcahse order screen using Fragments & updating those details in local SQLite DB.After successful DB operation ,  updating required Fragments from updated DB.
 3. Implemented views for different reports i.e. inventory valuation report , Income - Expense Report , Profit/Loss report using Fragments.
 4. Firing low inventory stock notification.
-    
+
+
+
+Social Networking App :-
+
+App Detail :-  An app basically connects peer over single platform where one can ask question OR can inquir about anything. Questions are grouped into seperate categories while they are being posted.
+
+-- Significant Features Implemented :-
+
+1. Adding Google Map Activity & setting Map API key.
+2. Requesting runtime permission for device location if android version is Marshmallow OR later versions.
+3. Setting Marker on Map Activity & Getting Location details.
+4. REMIND LOCATION ON THE GO - Created Geofences & Monitoring Geofence transition events (Enter OR Exit) as Location Service detects that the user has entered OR exited Geofence.
+5. Implemented Started Service which receives Intent contained in PendingIntent sent from Location Services & send Notification as output.
 
