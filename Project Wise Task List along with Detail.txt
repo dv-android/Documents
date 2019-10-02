@@ -6,7 +6,7 @@ To Do Reminder With Alarm Project :-
 2. Implemented different views for each different screen using Fragments.
    -- Inflated Menu Item using R.Menu.menu resource in onCreateOptionsMenu method.
    -- On clicking menu item , a general Dialog box will be shown.
-5. Implemented a Main Dialog box , Reminder Dialog box , Birthday Dialog box using AlertDialog API with Builder pattern.
+5. Implemented a Main Dialog box , Reminder Dialog box , Birthday Dialog box using AlertDialog API with Builder design pattern.
 6. Implemented Custom ArrayAdapter for ListView with custom list items which works for Main Dialog Box.
 7. Converting curent date & time into unix timestamp (milliseconds) using Calender API getTimeInMillis() method & storing into SQLite database for future use.
 8. Firing task reminder OR Birthday notification 24 hours prior to actual time of notification in Notification Drawer area as Upcoming event and another notification on actual time as a system level alert dialog box using AlarmManager , PendingIntent & BroadcastReceiver.    
@@ -38,3 +38,15 @@ App Detail :-  An app basically connects peer over single platform where one can
 4. REMIND LOCATION ON THE GO - Created Geofences & Monitoring Geofence transition events (Enter OR Exit) as Location Service detects that the user has entered OR exited Geofence.
 5. Implemented Started Service which receives Intent contained in PendingIntent sent from Location Services & send Notification as output.
 
+
+
+Live Location Tracking App :- 
+
+
+App Detail :- 
+
+-- Significant Features implemented :-
+
+1. Getting real time location of the device at frequent interval using Google Fused Location Provider API , GoogleApiClient , LocationRequest object , Location callbacks .
+2. Implemented Service that sends realtime location data to the backend server as HTTP post request using Volley library.
+3. Adding Google Map Activity & setting marker & camera to the location received from server in push notification.
