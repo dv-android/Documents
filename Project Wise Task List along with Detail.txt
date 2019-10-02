@@ -43,7 +43,7 @@ App Detail :-  An app basically connects peer over single platform where one can
 Live Location Tracking App :- 
 
 
-App Detail :- 
+App Detail :- Developed real time location tracking android app in which one can add their friends or employees to track their location and display it on Google Maps.
 
 -- Significant Features implemented :-
 
