@@ -40,13 +40,27 @@ App Detail :-  An app basically connects peer over single platform where one can
 
 
 
-Live Location Tracking App :- 
+Real Time Location Tracking App :- 
 
 
-App Detail :- Developed real time location tracking android app in which one can add their friends or employees to track their location and display it on Google Maps.
+App Detail :- A real time location tracking android app in which one can add their friends or employees to track their location and show it on Google Maps.
 
 -- Significant Features implemented :-
 
 1. Getting real time location of the device at frequent interval using Google Fused Location Provider API , GoogleApiClient , LocationRequest object , Location callbacks .
-2. Implemented Service that sends realtime location data to the backend server as HTTP post request using Volley library.
+2. Implemented Service that runs continuously in the background & sends realtime location data to the backend server as HTTP post request using Volley library.
 3. Adding Google Map Activity & setting marker & camera to the location received from server in push notification.
+4. Implemented WakefulBroadcastReceiver to acquire lock on Service which gets the location data of other users which is sent from GCM server.This service also runs continuously & sends location data to Google Map Activity using LocalBroadCastReceiver.
+
+Implementation Idea :-
+-- https://stackoverflow.com/questions/43909006/how-to-create-a-real-time-location-sharing-android-app
+-- https://technoranch.blogspot.com/2014/08/gcm-for-android-with-example.html
+-- https://www.pubnub.com/blog/sending-receiving-android-push-notifications-with-gcm-google-cloud-messaging/
+-- https://rdcworld-android.blogspot.com/2013/11/android-push-notification-google-cloud.html
+
+Concepts Related to Project :--
+Why WakefulBroadCast Receiver ??
+-- However, note that we did not use a BroadcastReceiver but a WakefulBroadcastReceiver. This simplifies our task: we a normal broadcast receiver, we would need to wake up the CPU if the screen is off, launch the service and put the phone back to sleep. This requires manipulating the Android PowerManager and WakeLock. The WakefulBroadcastReceiver takes care of all that for us. Pretty neat.
+
+Why required tak is implemented in Service ??
+-- A broadcast receiver by design cannot execute long tasks. It must call other classes to do its work. We need to create a new class. We cannot start a new activity because we do not want the user to be forced to switch to our app. Instead we use a service. It will be able to execute tasks in the background.
