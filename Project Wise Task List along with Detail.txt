@@ -49,7 +49,7 @@ App Detail :- A real time location tracking android app in which one can add the
 
 1. Getting real time location of the device at frequent interval using Google Fused Location Provider API , GoogleApiClient , LocationRequest object , Location callbacks .
 2. Implemented Service that runs continuously in the background & sends realtime location data to the backend server as HTTP post request using Volley library.
-3. Adding Google Map Activity & setting marker & camera to the location received from server in push notification.
+3. Launching Google Map Activity & setting marker & camera to the location received from server in push notification.
 4. Implemented WakefulBroadcastReceiver to acquire lock on Service which gets the location data of other users which is sent from GCM server.This service also runs continuously & sends location data to Google Map Activity using LocalBroadCastReceiver.
 
 Implementation Idea :-
@@ -57,6 +57,8 @@ Implementation Idea :-
 -- https://technoranch.blogspot.com/2014/08/gcm-for-android-with-example.html
 -- https://www.pubnub.com/blog/sending-receiving-android-push-notifications-with-gcm-google-cloud-messaging/
 -- https://rdcworld-android.blogspot.com/2013/11/android-push-notification-google-cloud.html
+-- For how to implement LocalBroadCastReceiver for sending location data from service to activity.
+   --https://stackoverflow.com/questions/8802157/how-to-use-localbroadcastmanager.
 
 Concepts Related to Project :--
 Why WakefulBroadCast Receiver ??
